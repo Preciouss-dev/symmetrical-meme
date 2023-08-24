@@ -1,6 +1,7 @@
 from datetime import datetime
 
 expenses = []
+salary = 0.0
 
 def removeExpense():
     while True:
@@ -17,12 +18,22 @@ def removeExpense():
                 print("Expense index out of range. Please try again.")
         else:
             print("Invalid input. Please enter a valid expense index.")
-
+    
+def deductFromSalary(amount):
+    global salary
+    salary -= amount
 
 def addExpense(amount, category, date):
     expense = {'amount': amount, 'category': category, 'date': date}
     expenses.append(expense)
+    deductFromSalary(amount)
+    print("Expense added successfully!")
+    calculateTotalExpenses()
 
+def calculateTotalExpenses():
+    total = sum(expense['amount'] for expense in expenses)
+    print(f"Total expenses: R{total:.2f}")
+    print(f"Remaining salary: R{salary:.2f}")
 
 def printMenu():
     print("Please choose from one of the following options...")
@@ -30,20 +41,28 @@ def printMenu():
     print("2. Remove An Expense")
     print("3. List All Expenses")
 
-
 def listExpenses():
-    print("\nHere is a list of your expenses...")
-    print("------------------------------------")
+    print("\nHere is a list of your expenses")
+    print("--------------------------------------")
     counter = 1
     for expense in expenses:
         print("*", counter, "- ", expense['amount'], " - ", expense['category'], " - ", expense['date'])
         counter += 1
     print("\n\n")
-
+    calculateTotalExpenses()
 
 if __name__ == "__main__":
+    print("Welcome! Please input your initial salary: (R)")
     while True:
-        #get user input
+        initial_salary = input("- ")
+        if initial_salary.isdigit():
+            salary = float(initial_salary)
+            break
+        else:
+            print("Invalid input. Please enter a valid amount.")
+
+    while True:
+        # get user input
         printMenu()
         optionSelected = input("- ")
 
@@ -73,7 +92,7 @@ if __name__ == "__main__":
                 except ValueError:
                     print("Invalid date format. Please use YYYY-MM-DD.")
 
-            addExpense(amountToAdd, category, date)
+            addExpense(float(amountToAdd), category, date)
         elif optionSelected == "2":
             removeExpense()
         elif optionSelected == "3":
