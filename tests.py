@@ -4,6 +4,7 @@ from datetime import datetime
 
 from main import removeExpense
 
+# Assuming you have the functions and variables defined in your code here
 
 class TestRemoveExpense(unittest.TestCase):
 
@@ -42,7 +43,6 @@ class TestRemoveExpense(unittest.TestCase):
         
         self.assertEqual(len(self.expenses), 0)
         self.assertEqual(salary, initial_salary)
-    
     
 
 if __name__ == '__main__':

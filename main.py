@@ -34,8 +34,7 @@ def removeExpense():
                 print("Expense index out of range. Please try again.")
         else:
             print("Invalid input. Please enter a valid expense index.")
-
-
+            
 
 #Function to sum up all the expenses
 def addTotalExpenses():
