@@ -2,51 +2,57 @@ from datetime import datetime
 
 expenses = []
 salary = 0.0
+    
+#Function to add an expense into expenses list
+def addExpense(amount, category, date):
+    expense = {'amount': amount, 'category': category, 'date': date}
+    expenses.append(expense)
+    minusFromSalary(amount)
+    print("Expense added successfully!")
+    calculateTotalExpenses()
+
+
+#Function to deduct an expense amount from the salary
+def minusFromSalary(amount):
+    global salary
+    salary -= amount
 
 def removeExpense():
     while True:
-        listExpenses()
+        listOfExpenses()
         print("What expense would you like to remove?")
         user_input = input("- ")
         
         if user_input.isdigit():
-            expenseToRemove = int(user_input)
-            if 0 <= expenseToRemove < len(expenses):
-                del expenses[expenseToRemove]
+            expenseRemove = int(user_input)
+            if 1 <= expenseRemove <= len(expenses):
+                del expenses[expenseRemove -1]
                 break
             else:
                 print("Expense index out of range. Please try again.")
         else:
             print("Invalid input. Please enter a valid expense index.")
-    
-def deductFromSalary(amount):
-    global salary
-    salary -= amount
 
-def addExpense(amount, category, date):
-    expense = {'amount': amount, 'category': category, 'date': date}
-    expenses.append(expense)
-    deductFromSalary(amount)
-    print("Expense added successfully!")
-    calculateTotalExpenses()
 
+
+#Function to sum up all the expenses
 def calculateTotalExpenses():
     total = sum(expense['amount'] for expense in expenses)
-    print(f"Total expenses: R{total:.2f}")
-    print(f"Remaining salary: R{salary:.2f}")
+    print(f"Total expenses: R{total:.2f}\nRemaining salary: R{salary:.2f}")
+
 
 def printMenu():
-    print("Please choose from one of the following options...")
+    print("Please choose a number from one of the following options below")
     print("1. Add A New Expense")
     print("2. Remove An Expense")
     print("3. List All Expenses")
 
-def listExpenses():
-    print("\nHere is a list of your expenses")
-    print("--------------------------------------")
+def listOfExpenses():
+    print("\nHere is a list of your expenses as requested")
+    print("-------------------------------------------")
     counter = 1
     for expense in expenses:
-        print("*", counter, "- ", expense['amount'], " - ", expense['category'], " - ", expense['date'])
+        print("*", counter, "-", expense['amount'], " - ", expense['category'], " - ", expense['date'])
         counter += 1
     print("\n\n")
     calculateTotalExpenses()
@@ -69,7 +75,7 @@ if __name__ == "__main__":
         if optionSelected == "1":
             print("How much was this expense? (R)")
             while True:
-                amountToAdd = input("- ")
+                amountToAdd = input("-")
                 if amountToAdd.isdigit():
                     break
                 else:
@@ -96,6 +102,6 @@ if __name__ == "__main__":
         elif optionSelected == "2":
             removeExpense()
         elif optionSelected == "3":
-            listExpenses()
+            listOfExpenses()
         else:
             print("Invalid input. Please try again.")
