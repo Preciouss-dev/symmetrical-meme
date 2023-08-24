@@ -9,18 +9,20 @@ def addExpense(amount, category, date):
     expenses.append(expense)
     minusFromSalary(amount)
     print("Expense added successfully!")
-    calculateTotalExpenses()
+    addTotalExpenses()
 
 
-#Function to deduct an expense amount from the salary
+#Function to deduct an expense amount from the salary after expense is added
 def minusFromSalary(amount):
     global salary
     salary -= amount
 
+
+#Function to remove salary
 def removeExpense():
     while True:
         listOfExpenses()
-        print("What expense would you like to remove?")
+        print("Which expense would you like to remove?")
         user_input = input("- ")
         
         if user_input.isdigit():
@@ -36,12 +38,12 @@ def removeExpense():
 
 
 #Function to sum up all the expenses
-def calculateTotalExpenses():
+def addTotalExpenses():
     total = sum(expense['amount'] for expense in expenses)
     print(f"Total expenses: R{total:.2f}\nRemaining salary: R{salary:.2f}")
 
 
-def printMenu():
+def displayMenu():
     print("Please choose a number from one of the following options below")
     print("1. Add A New Expense")
     print("2. Remove An Expense")
@@ -49,16 +51,16 @@ def printMenu():
 
 def listOfExpenses():
     print("\nHere is a list of your expenses as requested")
-    print("-------------------------------------------")
+    print("--------------------------------------------")
     counter = 1
     for expense in expenses:
         print("*", counter, "-", expense['amount'], " - ", expense['category'], " - ", expense['date'])
         counter += 1
     print("\n\n")
-    calculateTotalExpenses()
+    addTotalExpenses()
 
 if __name__ == "__main__":
-    print("Welcome! Please input your initial salary: (R)")
+    print("Welcome! Please enter your initial salary: (R)")
     while True:
         initial_salary = input("- ")
         if initial_salary.isdigit():
@@ -69,7 +71,7 @@ if __name__ == "__main__":
 
     while True:
         # get user input
-        printMenu()
+        displayMenu()
         optionSelected = input("- ")
 
         if optionSelected == "1":
