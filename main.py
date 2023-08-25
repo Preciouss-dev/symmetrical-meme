@@ -59,7 +59,7 @@ def listOfExpenses():
     addTotalExpenses()
 
 if __name__ == "__main__":
-    print("Welcome! Please enter your initial salary: (R)")
+    print("Welcome to your finace tracking! Please enter your initial salary: (R)")
     while True:
         initial_salary = input("- ")
         if initial_salary.isdigit():
