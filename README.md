@@ -2,5 +2,5 @@
 An expense tracking app
     add fuctionality to -
         - add expenses
-        - remove espenses
+        - remove expenses
         - list expense
